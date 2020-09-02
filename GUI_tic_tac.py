@@ -82,6 +82,45 @@ def drawO(x,y):
     # Update the screen
     screen.update()
 
+# This function activates all the event listeners
+def activate(functions):
+    for i in range(9):
+        screen.onkey(functions[i], str(i + 1))
+
+# This function deactivates all the event listeners
+def deactivate():
+    for i in range(9):
+        screen.onkey(None, str(i + 1))
+
+
+# This function will try to add an x to the inputted location
+def addX(row,column):
+    # Draw an x in the correct spot
+    drawX(-200+200 * column, 200-200 * row)
+
+# Define functions for the event listeners
+def squareOne():
+    addX(0,0)
+def squareTwo():
+    addX(0,1)
+def squareThree():
+    addX(0,2)
+def squareFour():
+    addX(1,0)
+def squareFive():
+    addX(1,1)
+def squareSix():
+    addX(1,2)
+def squareSeven():
+    addX(2,0)
+def squareEight():
+    addX(2,1)
+def squareNine():
+    addX(2,2)
+
+# Create a list of event listener functions
+functions = [squareOne, squareTwo, squareThree, squareFour, squareFive, squareSix, squareSeven, squareEight, squareNine]
+
 # Create turtle
 drawer = turtle.Turtle()
 
@@ -95,4 +134,6 @@ screen.tracer(0)
 # Draw the board
 drawBoard()
 
-drawO(0,0)
+# Activates the event listeners
+activate(functions)
+screen.listen()
