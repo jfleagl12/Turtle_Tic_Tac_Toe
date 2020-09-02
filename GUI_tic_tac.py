@@ -95,8 +95,20 @@ def deactivate():
 
 # This function will try to add an x to the inputted location
 def addX(row,column):
-    # Draw an x in the correct spot
-    drawX(-200+200 * column, 200-200 * row)
+    # Clear any announcements on the Screen
+    announcer.clear()
+
+    # Check if the space they want to add to is full
+    if board[row][column] == "x" or board[row][column] == "o":
+        # Tell them they can't take that spot
+        announcer.write("That spot is taken!", font = ("Arial", 36 ))
+        screen.update()
+    else:
+        # Draw an x in the correct spot
+        drawX(-200+200 * column, 200-200 * row)
+
+        # Add an x to the computer's board
+        board[row][column] = "x"
 
 # Define functions for the event listeners
 def squareOne():
@@ -123,9 +135,15 @@ functions = [squareOne, squareTwo, squareThree, squareFour, squareFive, squareSi
 
 # Create turtle
 drawer = turtle.Turtle()
+announcer = turtle.Turtle()
 
 drawer.pensize(10)
 drawer.ht()
+
+announcer.penup()
+announcer.ht()
+announcer.goto(-200,0)
+announcer.color("red")
 
 # Create screen
 screen = turtle.Screen()
@@ -133,6 +151,14 @@ screen.tracer(0)
 
 # Draw the board
 drawBoard()
+
+# Create the board
+board = []
+for i in range(3):
+    row = []
+    for j in range(3):
+        row.append(" ")
+    board.append(row)
 
 # Activates the event listeners
 activate(functions)
