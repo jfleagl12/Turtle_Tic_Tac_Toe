@@ -12,6 +12,18 @@
 
 import turtle
 
+# This function draws the grid the game will be played on
+def drawBoard():
+    # Draw both of the horizontal lines, starting from different heights
+    for i in range(2):
+        drawer.penup()
+        drawer.goto(-300,100-200 * i)
+        drawer.pendown()
+        drawer.forward(600)
+
+    # Update the screen with new changes
+    screen.update()
+
 # Create turtle
 drawer = turtle.Turtle()
 
@@ -21,3 +33,6 @@ drawer.ht()
 # Create screen
 screen = turtle.Screen()
 screen.tracer(0)
+
+# Draw the board
+drawBoard()
