@@ -21,6 +21,15 @@ def drawBoard():
         drawer.pendown()
         drawer.forward(600)
 
+    drawer.right(90)
+
+    # Draw both of the vertical lines
+    for i in range(2):
+        drawer.penup()
+        drawer.goto(-100+200 *i, 300)
+        drawer.pendown()
+        drawer.forward(600)
+
     # Update the screen with new changes
     screen.update()
 
