@@ -9,3 +9,15 @@
 # 7. Create a function to pick a place for the computer to put an o.
 # 8. Check if o won.
 # 9. Create a fuction to check for a tie.
+
+import turtle
+
+# Create turtle
+drawer = turtle.Turtle()
+
+drawer.pensize(10)
+drawer.ht()
+
+# Create screen
+screen = turtle.Screen()
+screen.tracer(0)
