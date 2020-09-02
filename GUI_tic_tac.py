@@ -11,6 +11,7 @@
 # 9. Create a fuction to check for a tie.
 
 import turtle
+import math
 
 # This function draws the grid the game will be played on
 def drawBoard():
@@ -45,6 +46,42 @@ def drawBoard():
     # Update the screen with new changes
     screen.update()
 
+# This function draws an "x" centered at the inputted coordinates
+def drawX(x,y):
+    # Move to the correct spot
+    drawer.penup()
+    drawer.goto(x,y)
+    drawer.pendown()
+
+    drawer.setheading(60)
+
+    # Draw the lines of the x
+    for i in range(2):
+        drawer.forward(75)
+        drawer.backward(150)
+        drawer.forward(75)
+        drawer.left(60)
+
+    # Update the screen
+    screen.update()
+
+# This function draws an "o" centered at the inputted coordinates
+def drawO(x,y):
+    # Move to the correct spot
+    drawer.penup()
+    drawer.goto(x,y + 75)
+    drawer.pendown()
+
+    drawer.setheading(0)
+
+    # Draw a circle with the correct size
+    for i in range(180):
+        drawer.forward((150 * math.pi)/180)
+        drawer.right(2)
+
+    # Update the screen
+    screen.update()
+
 # Create turtle
 drawer = turtle.Turtle()
 
@@ -57,3 +94,5 @@ screen.tracer(0)
 
 # Draw the board
 drawBoard()
+
+drawO(0,0)
