@@ -87,21 +87,59 @@ def checkWon(letter):
     # Check if there are three in a row horizontally
     for i in range(3):
         if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] == letter:
-        return True
+            return True
 
         if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] == letter:
-        return True
+            return True
 
     # Check if there are three in a row diagonally down
     if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] == letter:
-    return True
+        return True
 
     # Check if there are three in a row diagonally up
     if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[0][2] == letter:
-    return True
+        return True
 
     # If at this point, the given letter has not won
     return False
+
+# This function will add an o to the board in the best place
+def addO():
+    # check if any places would result in a win for o
+    for i in range(3):
+        for j in range(3):
+            if board[i][i] == " ":
+                board[i][j] = "o"
+                if checkWon("o"):
+                    drawO(-200+200 *j,200-200*i)
+                    return
+                board[i][i] = " "
+
+    # Check if there is any place that o should block x
+    for i in range(3):
+        for j in range(3):
+            if board[i][i] == " ":
+                board[i][j] = "x"
+                if checkWon("x"):
+                    drawO(-200+200 *j,200-200*i)
+                    return
+                board[i][i] = " "
+
+    # Try to place an o in one of the corners
+    for i in range(0,3,2):
+        for j in range(0,3,2):
+            if board[i][i] == " ":
+                board[i][i] = "o"
+                drawO(-200+200 *j,200-200*i)
+                return
+
+    # Place an o in any open spot
+        for i in range(3):
+            for j in range(3):
+                if board[i][i] == " ":
+                    board[i][i] = "o"
+                    drawO(-200+200 *j,200-200*i)
+                    return
 
 # This function activates all the event listeners
 def activate(functions):
@@ -140,6 +178,9 @@ def addX(row,column):
             # Update the screen and deactivate event listeners
             screen.update()
             deactivate()
+        else:
+            # If they didn't win, then an o gest added to the board
+            addO()
 
 # Define functions for the event listeners
 def squareOne():
