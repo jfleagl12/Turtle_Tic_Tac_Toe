@@ -82,6 +82,27 @@ def drawO(x,y):
     # Update the screen
     screen.update()
 
+# This function will check if the inputted player has won
+def checkWon(letter):
+    # Check if there are three in a row horizontally
+    for i in range(3):
+        if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] == letter:
+        return True
+
+        if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[0][i] == letter:
+        return True
+
+    # Check if there are three in a row diagonally down
+    if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] == letter:
+    return True
+
+    # Check if there are three in a row diagonally up
+    if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[0][2] == letter:
+    return True
+
+    # If at this point, the given letter has not won
+    return False
+
 # This function activates all the event listeners
 def activate(functions):
     for i in range(9):
@@ -109,6 +130,16 @@ def addX(row,column):
 
         # Add an x to the computer's board
         board[row][column] = "x"
+
+        # Check if that new x made x win
+        if checkWon("x"):
+            # Tell the user they won
+            announcer.goto(-97,0)
+            announcer.write("You Won!", font = ("Arial", 36))
+
+            # Update the screen and deactivate event listeners
+            screen.update()
+            deactivate()
 
 # Define functions for the event listeners
 def squareOne():
